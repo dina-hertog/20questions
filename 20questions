@@ -1,0 +1,111 @@
+<html>
+	<head>
+	<title> Robo </title>
+	</head>
+	<style>
+		.title{
+			text-align: center;
+			color: #522c8e;
+			border-style: double double hidden double;
+			}
+		.talk{
+			text-align: left;
+			color: #000000;
+			div{
+				margin-left: 80px;
+				background-color:
+			}
+	</style>
+	<body style="background-color:#e2ddff;">
+	<!--#215e48, #e2ddff--->
+	<body>
+		<h1 class = "title">Hello my name is Robert the Robot</h1>
+		<p class = "talk">Think of an object</p>
+		
+		<button onclick="DoQuestion('living')">Try it</button>
+		
+		<p id="demo"></p>
+		<p id="thing"></p>
+		<script>
+		
+			var possible = [
+				["living", "a mammal", "manmade"],
+				["a mammal", "a human", "a reptile"],
+				["a human", "male", "a cat"],
+				["male", "Bob", "Alice"],
+				["manmade", "metal", "on Earth"],
+				["a reptile", "extinct", "a bird"],
+				["a bird", "able to fly", "able to swim"],
+				["able to fly", "a raptor", "a penguin"],
+				["a raptor", "an eagle", "a parrot"],
+				["on Earth", "a rock", "a planet"],
+				["a planet", "Mars", "a star"],
+				["a star", "the sun", "a comet"],
+				["metal", "something you hold in your hand", "made of wood"],
+				["something you hold in your hand", "a spoon", " a car"],
+				["made of wood", "a table", "glass"],
+				["glass", "window", "plastic"],
+				["plastic", "a bag", "clothing"],
+				["clothing", "shirt", "paper"],
+				["paper", "book", "food"],
+				["food", "pizza", "electrical"],
+				["electrical", "computer", "art"],
+				["art", "sculpture", "a city"],
+				["a city", "New York", "a road"],
+				["sculpture", "The Thinker", "painting"],
+				["painting", "Starry Night", "a poem"],
+			];
+			
+			var i = 0;
+			var done = [];
+			
+			function FindQuestion (input){
+				var record = '';
+				for(i = 0; i < possible.length; i++){
+					if (possible[i][0] === input){
+						record = possible[i];
+						done.push(record);
+						return record;
+					}
+				}
+				return false;
+			}
+			
+			function DoQuestion(question){
+				record = FindQuestion(question);
+				var txt = prompt("Is it " + question +" ? Yes or No").toLowerCase();
+				if (record){
+					if (txt === "yes"){
+							return DoQuestion(record[1]);
+					}
+					else if (txt === "no"){
+							return DoQuestion(record[2])
+					}
+					else{
+						return DoQuestion(record[0]);
+					}
+				}
+				else {
+					var thing = answerQuestion(txt, done[done.length - 1]);
+					document.getElementById("thing").innerHTML = "You are thinking of... " + thing;
+				}
+				console.log(done);
+			}
+			
+			function answerQuestion (txt, input){
+				var answer = false;
+					if (txt === "yes"){
+						answer = input[1];
+						return answer;
+						}
+					else if (txt === "no"){
+						answer = prompt("OH? what were you thinking of?");
+						return answer;
+					}
+					console.log(txt);
+					console.log(answer);
+				return answer;
+			}
+			</script>
+	</body>
+</html>
